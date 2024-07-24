@@ -6,11 +6,13 @@
     "start": "next start"
   },
   "dependencies": {
-    "@headlessui/react": "^1.7.17",
+    "@headlessui/react": "^1.7.19",
     "@headlessui/tailwindcss": "^0.1.2",
     "@heroicons/react": "^2.0.13",
     "@tailwindcss/forms": "^0.5.3",
+    "d": "^1.0.2",
     "eventsource-parser": "^0.0.5",
+    "headlessui": "^0.0.0",
     "next": "^14.0.4",
     "next-plausible": "^3.12.0",
     "react": "18.2.0",
@@ -28,5 +30,11 @@
     "postcss": "^8.4.18",
     "tailwindcss": "^3.2.4",
     "typescript": "4.9.4"
-  }
+  },
+  "name": "prayer-mate",
+  "version": "1.0.0",
+  "description": "AI assistant that helps create Catholic prayers using user input",
+  "main": "next.config.js",
+  "author": "Ryan Macalandag",
+  "license": "ISC"
 }

@@ -17,7 +17,7 @@ import Toggle from '../components/Toggle';
 const Home: NextPage = () => {
   const [loading, setLoading] = useState(false);
   const [bio, setBio] = useState('');
-  const [vibe, setVibe] = useState<VibeType>('Professional');
+  const [vibe, setVibe] = useState<VibeType>('Prayerful');
   const [generatedBios, setGeneratedBios] = useState<String>('');
   const [isGPT, setIsGPT] = useState(false);
 
@@ -29,11 +29,11 @@ const Home: NextPage = () => {
     }
   };
 
-  const prompt = `Generate 3 ${
-    vibe === 'Casual' ? 'relaxed' : vibe === 'Funny' ? 'silly' : 'Professional'
-  } twitter biographies with no hashtags and clearly labeled "1.", "2.", and "3.". Only return these 3 twitter bios, nothing else. ${
-    vibe === 'Funny' ? 'Make the biographies humerous' : ''
-  }Make sure each generated biography is less than 300 characters, has short sentences that are found in Twitter bios, and feel free to use this context as well: ${bio}${
+  const prompt = `Generate a ${
+    vibe === 'Sombre' ? 'sorrowful' : vibe === 'Celebratory' ? 'joyful' : 'Prayerful'
+  } Catholic prayer ${
+    vibe === 'Celebratory' ? 'Make that prayer that is rejoicing in the occasion' : ''
+  }Make sure the generated prayer is less than 1200 characters, , and feel free to use this context as well: ${bio}${
     bio.slice(-1) === '.' ? '' : '.'
   }`;
 
@@ -108,17 +108,17 @@ const Home: NextPage = () => {
   return (
     <div className="flex max-w-5xl mx-auto flex-col items-center justify-center py-2 min-h-screen">
       <Head>
-        <title>Twitter Bio Generator</title>
+        <title>Catholic Prayer AI Assistant</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
       <Header />
       <main className="flex flex-1 w-full flex-col items-center justify-center text-center px-4 mt-12 sm:mt-20">
         <p className="border rounded-2xl py-1 px-4 text-slate-500 text-sm mb-5 hover:scale-105 transition duration-300 ease-in-out">
-          <b>96,434</b> bios generated so far
+          <b>96,434</b> prayers drafted so far
         </p>
         <h1 className="sm:text-6xl text-4xl max-w-[708px] font-bold text-slate-900">
-          Generate your next Twitter bio using AI
+          Let's draft a prayer for your special intentions
         </h1>
         <div className="mt-7">
           <Toggle isGPT={isGPT} setIsGPT={setIsGPT} />
@@ -134,8 +134,8 @@ const Home: NextPage = () => {
               className="mb-5 sm:mb-0"
             />
             <p className="text-left font-medium">
-              Drop in your job{' '}
-              <span className="text-slate-500">(or your favorite hobby)</span>.
+              What's the occasion or event?{' '}
+              <span className="text-slate-500">(or your special intentions)</span>.
             </p>
           </div>
           <textarea
@@ -143,11 +143,11 @@ const Home: NextPage = () => {
             onChange={(e) => setBio(e.target.value)}
             rows={4}
             className="w-full rounded-md border-gray-300 shadow-sm focus:border-black focus:ring-black my-5"
-            placeholder={'e.g. Amazon CEO'}
+            placeholder={'e.g. my friend Cathy giving birth, for John celebrating his 65th birthday, or for Ben who is travelling abroad'}
           />
           <div className="flex mb-5 items-center space-x-3">
             <Image src="/2-black.png" width={30} height={30} alt="1 icon" />
-            <p className="text-left font-medium">Select your vibe.</p>
+            <p className="text-left font-medium">Tone of prayer</p>
           </div>
           <div className="block">
             <DropDown vibe={vibe} setVibe={(newVibe) => setVibe(newVibe)} />
@@ -158,7 +158,7 @@ const Home: NextPage = () => {
               className="bg-black rounded-xl text-white font-medium px-4 py-2 sm:mt-10 mt-8 hover:bg-black/80 w-full"
               onClick={(e) => generateBio(e)}
             >
-              Generate your bio &rarr;
+              Click to draft your prayer &rarr;
             </button>
           )}
           {loading && (
@@ -184,17 +184,18 @@ const Home: NextPage = () => {
                   className="sm:text-4xl text-3xl font-bold text-slate-900 mx-auto"
                   ref={bioRef}
                 >
-                  Your generated bios
+                  Here is your drafted prayer:
                 </h2>
               </div>
               <div className="space-y-8 flex flex-col items-center justify-center max-w-xl mx-auto">
+                
                 {generatedBios
                   .substring(generatedBios.indexOf('1') + 3)
                   .split(/2\.|3\./)
                   .map((generatedBio) => {
                     return (
                       <div
-                        className="bg-white rounded-xl shadow-md p-4 hover:bg-gray-100 transition cursor-copy border"
+                        className="bg-white rounded-xl shadow-md p-8 hover:bg-gray-100 transition cursor-copy border"
                         onClick={() => {
                           navigator.clipboard.writeText(generatedBio);
                           toast('Bio copied to clipboard', {
